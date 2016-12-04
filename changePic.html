@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>随机头像——案例</title>
+  <style>
+	*{padding:0;margin:0}
+	body{font-size:14px;font-family:"微软雅黑";background:#333}
+	a{text-decoration:none;color:#fff}
+	ul li{list-style:none}
+	.wrap{width:640px;background:#111;margin:100px auto;padding:10px;overflow:hidden}
+	.wrap li{width:62px;height:62px;background:#111;border:1px solid #fff;float:left;}
+	.wrap li a{display:block;height:62px;width:62px;text-align:center;line-height:62px;}
+	.wrap li a img{width:62px;height:62px;}
+  </style>
+ </head>
+ <body>
+	<div class="wrap">
+		<ul id="avatarbox"></ul>
+	</div>
+	<script>
+	window.onload = function(){
+		tmHeadPic.init();
+	};
+	var tmHeadPic = {
+		count:102,//图片总数
+		size:60,//每次显示的图片数量
+		arr:[],//存放图片名称的数组，以便过滤重复值
+		init:function(){
+			var ulDom = document.getElementById("avatarbox");
+			var html = "";
+			var i = 1;
+			var tmArr = tmHeadPic.arr;
+			while(i<tmHeadPic.size){
+				var num = Math.ceil(Math.random()*tmHeadPic.count);//产生count之内的随机数
+				if(tmArr.indexOf(num)==-1){//去重复值，如果没有重发值就保存该随机数以便下一次判断并把该图片添加到li列表中，否则不做任何操作，进行下一轮循环
+					tmArr.push(num);
+					html+="<li class='items' num="+num+"><a href='#'><img src='images/"+num+".jpg'/></a></li>";
+					i++;
+				}
+			}
+			html+="<li class='items loadmore'><a href='javascript:void(0);' onclick='tmHeadPic.changePic()'>换一批</a></li>";
+			//追加元素
+			ulDom.innerHTML = html;
+		},
+		changePic:function(){
+			tmHeadPic.arr = [];//点击换一批按钮后，清空之前的数据；而图片列表由调用init自动清空
+			tmHeadPic.init();
+		}
+	};
+	</script>
+ </body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>全/反选——案例</title>
+		<style type="text/css">
+			*{margin:0px;padding:0px;}
+			p{width:80%;margin:8px auto;}
+			p:first-child{margin-top:100px;}
+		</style>
+	</head>
+	<body>
+		<p><label><input type="checkbox" id="checkname" value="" />全选</label></p>
+		<p><label><input type="checkbox" name="checkname"  value="1" />打球</label>
+		<label><input type="checkbox" name="checkname"  value="2" />跑步</label>
+		<label><input type="checkbox" name="checkname"  value="3" />读书</label>
+		<label><input type="checkbox" name="checkname"  value="4" />游泳</label>
+		<label><input type="checkbox" name="checkname"  value="5" />shop</label></p>
+		<script type="text/javascript">
+			var dom = document.getElementById("checkname");
+			var domCheck = document.getElementsByName("checkname");
+			dom.onclick = function(){
+				if(this.checked){
+					changecheck();
+				}else{
+					changecheck();
+				}
+			}
+			function changecheck (){
+				for (var i=0;i<domCheck.length;i++) {
+					if(domCheck[i].checked){
+						domCheck[i].checked = false;
+					}else{
+						domCheck[i].checked = true;
+					}
+				}
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>节点内容排序</title>
+		<style type="text/css">
+			*{margin:0px;padding:0px;}
+			#wrap{width:31%;margin:100px auto 10px;}
+			ul li{list-style: none;margin-top:10px;}
+		</style>
+	</head>
+	<body>
+
+		<ul id="wrap">
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ul>
+		<input type="button" value="排序" onclick="tm_sort()" style="margin-left:32%;border:0px;border-radius:5px;line-height:32px;width:80px;font-size:16px"/>
+	<script type="text/javascript">
+		function tm_sort(){
+			var ulDom = document.getElementById("wrap");
+			if(ulDom.hasChildNodes()){
+				for(var i=0;i<ulDom.childNodes.length;i++){
+					alert(ulDom.childNodes[i].nodeType);
+				}
+
+			}
+		}
+	</script>
+	</body>
+</html>

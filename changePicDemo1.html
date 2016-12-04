@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>根据随机头像更换自己喜欢的头像——案例</title>
+  <style>
+	*{padding:0;margin:0}
+	body{font-size:14px;font-family:"微软雅黑";}
+	a{text-decoration:none;color:#fff}
+	ul li{list-style:none}
+	#dialogover{background:#111;position:fixed;top:0;left:0;right:0;bottom:0;opacity:0.8;z-index:9;display:none;}
+	#wrap{width:640px;margin:8% auto;background:rgba(0, 128, 0, 0.95);padding:10px;overflow:hidden;z-index:10;display:none;}
+	#wrap li{width:62px;height:62px;background:#111;border:1px solid #fff;float:left;}
+	#wrap li a{display:block;height:62px;width:62px;text-align:center;line-height:62px;}
+	#wrap li a img{width:62px;height:62px;}
+	#headpic{display:inline-block;width:120px;height:120px;border-radius:120px;background: url(images/1.jpg);margin:50px 0px 0px 50px;}
+  </style>
+ </head>
+ <body>
+ 	<a id="headpic" href="javascript:void(0)" onclick="tmHeadPic.showPic()"></a>
+	<div id="dialogover">
+		<div id="wrap">
+			<ul id="avatarbox"></ul>
+		</div>
+	</div>
+	<script>
+	window.onload = function(){
+		tmHeadPic.init();
+	};
+	var tmHeadPic = {
+		count:102,//图片总数
+		size:60,//每次显示的图片数量
+		arr:[],//存放图片名称的数组，以便过滤重复值
+		init:function(){
+			var ulDom = document.getElementById("avatarbox");
+			var html = "";
+			var i = 1;
+			var tmArr = tmHeadPic.arr;
+			while(i<tmHeadPic.size){
+				var num = Math.ceil(Math.random()*tmHeadPic.count);//产生count之内的随机数
+				if(tmArr.indexOf(num)==-1){//去重复值，如果没有重发值就保存该随机数以便下一次判断并把该图片添加到li列表中，否则不做任何操作，进行下一轮循环
+					tmArr.push(num);
+					html+="<li class='items'><a href='javascript:void(0)' onclick='tmHeadPic.changeHead(this)' num="+num+"><img src='images/"+num+".jpg'/></a></li>";
+					i++;
+				}
+			}
+			html+="<li class='items loadmore'><a href='javascript:void(0);' onclick='tmHeadPic.changePic()'>换一批</a></li>";
+			//追加元素
+			ulDom.innerHTML = html;
+		},
+		/*换一批图片*/
+		changePic:function(){
+			tmHeadPic.arr = [];//点击换一批按钮后，清空之前的数据；而图片列表由调用init自动清空
+			tmHeadPic.init();
+		},
+		/*更换头像*/
+		changeHead:function(obj){
+			var header = document.getElementById("headpic");
+			header.style.background = "url(images/"+obj.getAttribute("num")+".jpg)";
+			tmHeadPic.changePic()
+			tmHeadPic.hiddenPic();
+		},
+		/*显示头像层图列表*/
+		showPic:function(){
+			var dialogDom = document.getElementById("dialogover");
+			var wrapDom = document.getElementById("wrap");
+			wrapDom.style.display = "block";
+			dialogDom.style.display = "block";
+		},
+		/*隐藏头像层图列表*/
+		hiddenPic:function(){
+			var dialogDom = document.getElementById("dialogover");
+			var wrapDom = document.getElementById("wrap");
+			wrapDom.style.display = "none";
+			dialogover.style.display = "none";
+		}
+	};
+	</script>
+ </body>
+</html>

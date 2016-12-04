@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>jQuery定义插件</title>
+ </head>
+ <body>
+		<form id="userForm">
+			<input type="text"/>
+			<input type="submit" class="keke_submit"/>
+		</form>
+		<form id="contentForm">
+			<input type="text"/>
+			<input type="submit"  class="keke_submit"/>
+		</form>
+
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript">
+	$(function() {
+		$("#userForm").kekeValidator({
+			callback: function() {
+				alert("111111111111");
+			}
+		});
+		$("#contentForm").kekeValidator({
+			callback: function() {
+				alert("2222222222222222");
+			}
+		});
+	});
+
+	/**
+	 * jQuery定义插件
+	 * 1：$.插件名 = function(){}
+	 * 2：$.fn.插件名= function(){}
+	 * @param {Object} $
+	 */
+	(function($) {
+		$.fn.kekeValidator = function(options) {
+			var opts = $.extend({}, $.fn.kekeValidator, options);
+			//this 已经是一个jquery对象
+			return this.each(function() {
+				$(this).find("input[type='submit']").click(function() {
+					if (opts.callback) opts.callback();
+				});
+			});
+		};
+		$.fn.kekeValidator.defaults = {
+			callback: function() {
+
+			}
+		};
+	})(jQuery)
+</script>
+ </body>
+</html>

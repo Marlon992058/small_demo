@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>增加表单元素添加记录——案例</title>
+		<style type="text/css">
+			*{margin: 0px;padding: 0px;}
+			a{text-decoration: none;color: #FFF;display: inline-block;padding: 10px 15px;background: #141414;border-radius: 5px;margin-bottom: 20px;}
+			#wrap{width: 80%;margin:50px auto;}
+			#wrap #box ul li{list-style: none;width: 180px;line-height: 32px;border: 1px solid red;float: left;}
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<a href="javascript:void(0)" onclick="tmOption.add(this)">增加</a>
+			<div id="box"></div>
+		</div>
+		<script type="text/javascript" src="js/jquery-1.11.1.min.js" ></script>
+		<script type="text/javascript">
+			var tmOption = {
+				add:function(){
+					$("#box").prepend(
+					"<ul>"+
+					"<li>1</li>"+
+					"<li>2</li>"+
+					"<li>3</li>"+
+					"<li>4</li>"+
+					"<li>5</li>"+
+					"<li>6</li>"+
+				"</ul>");
+				}
+			};
+		</script>
+		<!--<script type="text/javascript" src="js/prototype.js"></script>-->
+	</body>
+</html>
